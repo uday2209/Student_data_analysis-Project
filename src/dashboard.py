@@ -64,17 +64,28 @@ def create_dashboard(df):
     st.pyplot(fig)
     plt.close()
 
+    # 6. Maths Score of all students 
+    st.subheader("6.  Distribution of Math Scores")
+    fig, ax = plt.subplots(figsize=(8,4))
+    sns.histplot(df["math_score"])
+    plt.xlabel("Math Score")
+    plt.ylabel("Count")
+    plt.title("Distribution of Math Scores")
+    plt.tight_layout()
+    st.pyplot(fig)
+    plt.close()
+    
     # Template Section: Add More Visualizations
-    # st.subheader("X. [Your Section Title Here]")
-    # fig, ax = plt.subplots(figsize=(8, 4))
+    st.subheader("7. Avg_Reading Score by Test_preparation")
+    fig, ax = plt.subplots(figsize=(8, 4))
+    avg_reading = df.groupby('test_preparation_course')['reading_score'].mean()
     
-    # Insert your custom graphing code below:
-    # Example:
-    # sns.barplot(x="column_x", y="column_y", data=df, ax=ax)
+    avg_reading.plot(kind='bar', figsize=(8,6), edgecolor='black')
     
-    # plt.xlabel("[X-axis label]")
-    # plt.ylabel("[Y-axis label]")
-    # plt.title("[Optional Title]")
-    # plt.tight_layout()
-    # st.pyplot(fig)
-    # plt.close()
+    
+    # sns.barplot(x="column_x", y="column_y", data=df, ax=ax) 
+    plt.title('Average Reading Score by Test Preparation Course')
+    plt.xlabel('Test Preparation Course')
+    plt.ylabel('Average Reading Score')
+    st.pyplot(fig)
+    plt.close()
